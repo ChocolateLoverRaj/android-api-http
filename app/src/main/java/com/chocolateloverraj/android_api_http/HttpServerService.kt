@@ -36,9 +36,14 @@ class HttpServerService : Service() {
             })
 
             routing {
+                post("/requestPermission") {
+                    Log.d(HttpServerService::class.java.name, call.request.headers["Origin"]!!)
+                    call.respond(HttpStatusCode.NotImplemented)
+                }
+
                 get("/") {
                     call.respondText(
-                        "Server is on",
+                        "Server is on ${call.request.headers["Origin"]}",
                         ContentType.Text.Plain
                     )
                 }
